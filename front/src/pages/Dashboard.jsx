@@ -12,18 +12,24 @@ const logout = () => {
   localStorage.removeItem("user");
   navigate("/login");
 };
-    return(
-        <div>
-            <h1>Dashboard</h1>
-            <h2>
-                Welcome {user?.name}
-            </h2>
+    return (
+  <div className="dashboard">
+    <div className="dashboard-card">
+      <h1>Dashboard</h1>
 
-            <button onClick={logout}>
-             Logout
-            </button>
-        </div>
-    );
+      <h2>
+        Welcome, {user?.name}
+      </h2>
+
+      <button
+        className="logout-btn"
+        onClick={logout}
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+);
 }
 
 
