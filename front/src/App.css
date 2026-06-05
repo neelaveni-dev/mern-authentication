@@ -8,6 +8,7 @@ body{
   font-family:Segoe UI, sans-serif;
   background:linear-gradient(135deg,#667eea,#764ba2);
   min-height:100vh;
+
 }
 
 .container{
@@ -76,37 +77,62 @@ body{
 }
 
 .dashboard{
+  
   min-height:100vh;
   display:flex;
   justify-content:center;
+  padding: 40px 20px;
   align-items:center;
+  background: linear-gradient(135deg,#4f46e5, #2563eb);
 }
 
 .dashboard-card{
   background:white;
-  width:500px;
-  padding:50px;
-  border-radius:24px;
+  width:400px;
+  padding: 25px;
+  border-radius:15px;
   text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,0.15);
+  box-shadow:0 5px 20px rgba(0,0,0,0.2);
+  flex-direction: column;
+  gap: 15px;
+  display: flex;
+  margin: 40px 0;
+
 }
 
 .dashboard-card h1{
   color:#222;
   margin-bottom:20px;
+  align-items: center;
 }
 
 .dashboard-card h2{
   color:#555;
   margin-bottom:30px;
 }
+.dashboard-card input,.dashboard-card textarea{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #555;
+  font-size: 16px;
+  box-sizing: border-box;
+ 
+  color: white;
 
+}
+.dashboard-card textarea {
+  height: 80px;
+  resize: none;
+}
+.dashboard-card input,.dashboard-card textarea,.dashboard-card button {
+  margin: 8px 0;
+}
 .logout-btn{
   border:none;
   background:#ef4444;
   color:white;
-  padding:12px 24px;
-  border-radius:10px;
+  padding:12px;
+  border-radius:8px;
   cursor:pointer;
   font-size:15px;
   font-weight: 600;
@@ -115,6 +141,16 @@ body{
 .logout-btn:hover{
   background:#dc2626;
 }
+.update-btn{
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+}
 
 @media(max-width:500px){
 
@@ -122,9 +158,35 @@ body{
     width:90%;
     padding:25px;
   }
-
   .dashboard-card{
-    width:90%;
-    padding:25px;
+    width: 90%;
+    padding: 25px;
   }
-}
+  }
+  .dashboard-card input{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  .dashboard-card button{
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .logout-btn{
+    background: #ef4444;
+    color: white;
+    
+  }
+.dark{
+  background: #121212;
+  color: white;
+  }
+  .dark .dashboard-card {
+  background: #1e1e1e;
+  color: white;
+  }

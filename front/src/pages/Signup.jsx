@@ -6,6 +6,8 @@ function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -48,12 +50,16 @@ function Signup() {
       />
 
       <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+  type={showPassword ? "text" : "password"}
+  placeholder="Password"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}/>
 
+<button
+  type="button"
+  onClick={() => setShowPassword(!showPassword)}>
+  {showPassword ? "Hide" : "Show"}
+</button>
       <button type="submit">Signup</button>
     </form>
 

@@ -75,5 +75,63 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+router.put("/update-profile", async (req, res) => {
+  try {
+    const { email, name, phone, address } = req.body;
 
+    const updatedUser = await User.findOneAndUpdate(
+      { email },
+      {
+        name,
+        phone,
+        address,
+      },
+      { new: true }
+    );
+
+    res.json({
+      message: "Profile Updated Successfully",
+      user: updatedUser,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+});
+router.put("/change-password", async (req, res) => {
+  const {
+    email,
+    currentPassword,
+    newPassword,
+  } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user)
+    return res.status(404).json({
+      message: "User not found",
+    });
+
+  const match = await bcrypt.compare(
+    currentPassword,
+    user.password
+  );
+
+  if (!match)
+    return res.status(400).json({
+      message: "Wrong Password",
+    });
+
+  user.password = await bcrypt.hash(
+    newPassword,
+    10
+  );
+
+  await user.save();
+
+  res.json({
+    message: "Password Updated",
+  });
+});
 module.exports = router;

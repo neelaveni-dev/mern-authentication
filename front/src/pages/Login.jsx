@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState("false");
 
   const navigate = useNavigate();
 
@@ -37,19 +38,20 @@ function Login() {
         type="email"
         placeholder="Email"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+        onChange={(e) => setEmail(e.target.value)}/>
+  <input
+  type={showPassword ? "text" : "password"}
+  placeholder="Password"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}/>
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-
+<button
+  type="button"
+  onClick={() => setShowPassword(!showPassword)}>
+  {showPassword ? "Hide" : "Show"}
+</button>
       <button type="submit">Login</button>
-    </form>
-
+</form>
     <p className="link-text">
       <Link to="/signup">Create Account</Link>
     </p>
