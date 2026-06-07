@@ -40,7 +40,7 @@ toast.success("Image Uploaded");
 const updateProfile = async () => {
 try {
 const res = await axios.put(
-"http://localhost:5000/api/auth/update-profile",
+"https://mern-authentication-r3ij.onrender.com/api/auth/update-profile",
 {
 email: user.email,
 name,
@@ -62,7 +62,7 @@ address,
 const changePassword = async () => {
   try {
     await axios.put(
-      "http://localhost:5000/api/auth/change-password",
+      "https://mern-authentication-r3ij,onrender.com/api/auth/change-password",
       {
         email: user.email,
         currentPassword,
@@ -81,7 +81,7 @@ localStorage.removeItem("user");
 navigate("/login");
 };
 <img
-  src={`http://localhost:5000/uploads/${user?.profileImage}`}
+  src={`htts://mern-authentication-r3ij.onrender.com/uploads/${user?.profileImage}`}
   alt="Profile"
   width="150"
 />

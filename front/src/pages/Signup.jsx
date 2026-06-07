@@ -15,7 +15,7 @@ function Signup() {
     e.preventDefault();
 
     try {
-      await axios.post("http://127.0.0.1:5000/api/auth/register", {
+      await axios.post("https://mern-authentication-r3ij.onrender.com/api/auth/register", {
         name,
         email,
         password,
