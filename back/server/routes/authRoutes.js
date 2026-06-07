@@ -1,11 +1,24 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const multer = require("multer");
+const path = require("path");
 const User = require("../models/user");
 
 const router = express.Router();
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      Date.now() + path.extname(file.originalname)
+    );
+  },
+});
 
+const upload = multer({ storage });
 router.post("/register", async (req, res) => {
     console.log("REGISTER API HIT");
   try {
@@ -65,7 +78,10 @@ router.post("/login", async (req, res) => {
       token,
       user:{
         name: user.name,
-        email: user.email
+        email: user.email,
+        phone: user.phone,
+        address: user.address,
+        profileImage: user.profileImage
       }
     });
   } catch (err) {
@@ -77,7 +93,7 @@ router.post("/login", async (req, res) => {
 });
 router.put("/update-profile", async (req, res) => {
   try {
-    const { email, name, phone, address } = req.body;
+    const { email, name, phone, address,profileImage } = req.body;
 
     const updatedUser = await User.findOneAndUpdate(
       { email },
@@ -85,6 +101,7 @@ router.put("/update-profile", async (req, res) => {
         name,
         phone,
         address,
+        profileImage
       },
       { new: true }
     );
@@ -134,4 +151,31 @@ router.put("/change-password", async (req, res) => {
     message: "Password Updated",
   });
 });
+router.put(
+  "/upload-image",
+  upload.single("image"),
+  async (req, res) => {
+    try {
+      const { email } = req.body;
+
+      const updatedUser =
+        await User.findOneAndUpdate(
+          { email },
+          {
+            profileImage: req.file.filename,
+          },
+          { new: true }
+        );
+
+      res.json({
+        message: "Image Uploaded",
+        user: updatedUser,
+      });
+    } catch (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    }
+  }
+);
 module.exports = router;

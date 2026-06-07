@@ -9,12 +9,33 @@ const user = JSON.parse(localStorage.getItem("user"));
 const [name, setName] = useState(user?.name || "");
 const [phone, setPhone] = useState(user?.phone || "");
 const [address, setAddress] = useState(user?.address || "");
-const [image, setImage] = useState(null);
 const [currentPassword,setCurrentPassword] = useState("");
 const [newPassword, setNewPassword] = useState("");
 const [darkMode, setDarkMode] = useState(false);
-
 const navigate = useNavigate();
+
+const [image, setImage] = useState(null);
+
+const handleUpdateProfile = async () =>
+{
+  try {
+const formData = new FormData();
+
+formData.append("image", image);
+formData.append("email", user.email);
+
+await axios.put(
+
+  "http://localhost:5000/api/auth/upload-image",formData
+);
+
+toast.success("Image Uploaded");
+} catch (err) 
+ {
+  console.log(err);
+  toast.error("Image Uploaded Failed");
+ }
+};
 
 const updateProfile = async () => {
 try {
@@ -59,7 +80,11 @@ localStorage.removeItem("token");
 localStorage.removeItem("user");
 navigate("/login");
 };
-
+<img
+  src={`http://localhost:5000/uploads/${user?.profileImage}`}
+  alt="Profile"
+  width="150"
+/>
 return (
   <div className={darkMode ? "dashboard dark" : "dashboard"}>
     <div className="dashboard-card">
@@ -94,7 +119,10 @@ return (
       
       <button
         className="update-btn"
-        onClick={updateProfile}
+        onClick={async () => {
+          await handleUpdateProfile();
+          await updateProfile();
+        }}
       >
         Update Profile
       </button>
