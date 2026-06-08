@@ -24,7 +24,7 @@ const formData = new FormData();
 formData.append("image", image);
 formData.append("email", user.email);
 
-const re = await axios.put(
+const res = await axios.put(
 
   "https://mern-authentication-r3ij.onrender.com/api/auth/upload-image",formData
 );
