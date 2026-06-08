@@ -24,10 +24,11 @@ const formData = new FormData();
 formData.append("image", image);
 formData.append("email", user.email);
 
-await axios.put(
+const re = await axios.put(
 
-  "https://mern-authentication-r3ij.onrender.com/api/auth/upload-image",FformData
+  "https://mern-authentication-r3ij.onrender.com/api/auth/upload-image",formData
 );
+localStorage.setItem("user",JSON.stringify(res.data.user));
 
 toast.success("Image Uploaded");
 } catch (err) 
@@ -62,7 +63,7 @@ address,
 const changePassword = async () => {
   try {
     await axios.put(
-      "https://mern-authentication-r3ij,onrender.com/api/auth/change-password",
+      "https://mern-authentication-r3ij.onrender.com/api/auth/change-password",
       {
         email: user.email,
         currentPassword,
@@ -81,7 +82,7 @@ localStorage.removeItem("user");
 navigate("/login");
 };
 <img
-  src={`htts://mern-authentication-r3ij.onrender.com/uploads/${user?.profileImage}`}
+  src={`https://mern-authentication-r3ij.onrender.com/uploads/${user?.profileImage}`}
   alt="Profile"
   width="150"
 />
