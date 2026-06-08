@@ -26,7 +26,7 @@ formData.append("email", user.email);
 
 await axios.put(
 
-  "http://localhost:5000/api/auth/upload-image",formData
+  "https://mern-authentication-r3ij.onrender.com/api/auth/upload-image",formData
 );
 
 toast.success("Image Uploaded");
